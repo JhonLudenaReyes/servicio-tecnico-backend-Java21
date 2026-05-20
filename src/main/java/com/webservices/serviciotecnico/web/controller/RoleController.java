@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.webservices.serviciotecnico.domain.dto.RolSelectDTO;
+import com.webservices.serviciotecnico.domain.mapper.PermissionMapper;
 import com.webservices.serviciotecnico.domain.mapper.RolSelectMapper;
 import com.webservices.serviciotecnico.domain.service.RolService;
 import com.webservices.serviciotecnico.persistence.dtos.RolSelect;
@@ -21,15 +22,28 @@ import com.webservices.serviciotecnico.persistence.model.Rol;
 
 @RestController
 @RequestMapping("/roles")
-public class RolController {
+public class RoleController {
 
 	private final RolService rolService;
 	private final RolSelectMapper rolSelectMapper;
+	private final PermissionMapper permissionMapper;
 
-	public RolController(RolService rolService, RolSelectMapper rolSelectMapper) {
+	public RoleController(RolService rolService, RolSelectMapper rolSelectMapper, PermissionMapper permissionMapper) {
 		this.rolService = rolService;
 		this.rolSelectMapper = rolSelectMapper;
+		this.permissionMapper = permissionMapper;
 	}
+	
+	@GetMapping("/permissions/{roleId}")
+	public ResponseEntity<?> getPermissions(@PathVariable("roleId") Integer roleId) {
+		Optional<Rol> role = rolService.getRole(roleId);
+		if(role.isPresent()) {
+			return new ResponseEntity<>(permissionMapper.toDTOList(role.get().getPermisos()), HttpStatus.OK);	
+		}else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
 
 	@GetMapping("/role-permits/{roleId}")
 	public ResponseEntity<?> getRole(@PathVariable("roleId") int roleId) {

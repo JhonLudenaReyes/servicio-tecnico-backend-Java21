@@ -1,5 +1,7 @@
 package com.webservices.serviciotecnico.web.controller;
 
+import java.util.Optional;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,6 +26,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.webservices.serviciotecnico.web.security.JwtUtils;
 import com.webservices.serviciotecnico.web.security.UserDetailsServiceImpl;
 import com.webservices.serviciotecnico.domain.dto.AuthenticationResponse;
+import com.webservices.serviciotecnico.domain.dto.LoginCredentials;
 
 @RestController
 @RequestMapping("usuarios")
@@ -35,9 +38,8 @@ public class UsuarioController {
 	private final UserDetailsServiceImpl userDetailsService;
 	private final JwtUtils jwtUtils;
 
-	public UsuarioController(UsuarioService usuarioService, UsuarioMapper usuarioMapper, 
-			AuthenticationManager authenticationManager, UserDetailsServiceImpl userDetailsService, 
-			JwtUtils jwtUtils) {
+	public UsuarioController(UsuarioService usuarioService, UsuarioMapper usuarioMapper,
+			AuthenticationManager authenticationManager, UserDetailsServiceImpl userDetailsService, JwtUtils jwtUtils) {
 		this.usuarioService = usuarioService;
 		this.usuarioMapper = usuarioMapper;
 		this.authenticationManager = authenticationManager;
@@ -46,19 +48,34 @@ public class UsuarioController {
 	}
 
 	@PostMapping("/authenticate")
-	public ResponseEntity<?> createAuthenticationToken(@RequestBody Usuario usuario) throws Exception {
+	public ResponseEntity<?> createAuthenticationToken(@RequestBody LoginCredentials loginCredentials)
+			throws Exception {
 		try {
-			authenticationManager.authenticate(
-					new UsernamePasswordAuthenticationToken(usuario.getUsuario(), usuario.getContrasenia())
-			);
+			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginCredentials.getUsuario(),
+					loginCredentials.getContrasenia()));
 		} catch (Exception e) {
-			throw new Exception("Usuario o contraseña incorrectos", e);
+			throw new Exception("Usuario y/o contraseña incorrectos", e);
 		}
 
-		final UserDetails userDetails = userDetailsService.loadUserByUsername(usuario.getUsuario());
+		final UserDetails userDetails = userDetailsService.loadUserByUsername(loginCredentials.getUsuario());
 		final String jwt = jwtUtils.generateToken(userDetails);
 
 		return ResponseEntity.ok(new AuthenticationResponse(jwt));
+	}
+
+	@PostMapping("/login")
+	public ResponseEntity<UsuarioDTO> getUserLogin(@RequestBody LoginCredentials loginCredentials) throws Exception {
+		try {
+			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginCredentials.getUsuario(),
+					loginCredentials.getContrasenia()));
+		} catch (Exception e) {
+			throw new Exception("Usuario y/o contraseña incorrectos", e);
+		}
+
+		return usuarioService.getByUsuario(loginCredentials.getUsuario())
+				.map(user -> new ResponseEntity<>(usuarioMapper.toDTO(user), HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+
 	}
 
 	@PostMapping("/save")
@@ -83,8 +100,7 @@ public class UsuarioController {
 
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<UsuarioDTO> delete(@PathVariable Integer id) {
-		return usuarioService.delete(id)
-				.map(user -> new ResponseEntity<>(usuarioMapper.toDTO(user), HttpStatus.OK))
+		return usuarioService.delete(id).map(user -> new ResponseEntity<>(usuarioMapper.toDTO(user), HttpStatus.OK))
 				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
 

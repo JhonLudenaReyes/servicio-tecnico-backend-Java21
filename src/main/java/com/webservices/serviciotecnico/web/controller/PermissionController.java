@@ -3,10 +3,8 @@ package com.webservices.serviciotecnico.web.controller;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,12 +17,12 @@ import com.webservices.serviciotecnico.domain.service.PermisoService;
 import com.webservices.serviciotecnico.persistence.model.Permiso;
 
 @RestController
-@RequestMapping("/permisos")
-public class PermisoController {
+@RequestMapping("/permissions")
+public class PermissionController {
 
 	private final PermisoService permisoService;
 
-	public PermisoController(PermisoService permisoService) {
+	public PermissionController(PermisoService permisoService) {
 		this.permisoService = permisoService;
 	}
 

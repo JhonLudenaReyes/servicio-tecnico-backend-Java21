@@ -7,7 +7,6 @@ import lombok.Data;
 public class UsuarioDTO {
     private Integer idUsuario;
     private String usuario;
-    private String estado;
     private PersonaDTO persona;
     private List<RolDTO> roles;
 }

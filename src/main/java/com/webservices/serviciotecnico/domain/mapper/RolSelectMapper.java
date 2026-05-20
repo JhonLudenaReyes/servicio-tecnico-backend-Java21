@@ -11,8 +11,10 @@ public interface RolSelectMapper {
 	
 	RolSelectDTO toDTO(Rol rol);
 	
+	Rol toEntity(RolSelectDTO dto);
+	
 	List<RolSelectDTO> toDTOList(List<Rol> roles);
 	
-	Rol toEntity(RolSelectDTO dto);
+	
 
 }

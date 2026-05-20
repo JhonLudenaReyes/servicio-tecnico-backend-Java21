@@ -6,5 +6,4 @@ import lombok.Data;
 public class RolDTO {
     private Integer idRol;
     private String rol;
-    private String estado;
 }
