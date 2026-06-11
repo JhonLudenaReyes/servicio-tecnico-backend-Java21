@@ -43,7 +43,6 @@ public class RoleController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
 
 	@GetMapping("/role-permits/{roleId}")
 	public ResponseEntity<?> getRole(@PathVariable("roleId") int roleId) {
@@ -53,6 +52,13 @@ public class RoleController {
 		}else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+	}
+
+	@GetMapping("/role/{roleId}")
+	public ResponseEntity<Rol> GetRoleById(@PathVariable("roleId") Integer roleId){
+		return rolService.getRole(roleId)
+				.map(role -> new ResponseEntity<>(role, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
 	
 	@GetMapping("/role-select/{roleId}")

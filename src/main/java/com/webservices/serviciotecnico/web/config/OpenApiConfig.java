@@ -21,12 +21,12 @@ public class OpenApiConfig {
                                         .type(SecurityScheme.Type.HTTP)
                                         .scheme("basic")))
                 .info(new Info()
-                        .title("API de Sistema de Servicio Técnico")
+                        .title("API de Sistema de Servicio TÃ©cnico")
                         .version("1.0")
-                        .description("Esta es la documentación oficial de los servicios web para el Sistema de Gestión de Servicio Técnico. " +
-                                     "Aquí podrás probar los endpoints de usuarios, roles, personas y clientes.")
+                        .description("Esta es la documentaciÃ³n oficial de los servicios web para el Sistema de GestiÃ³n de Servicio TÃ©cnico. " +
+                                     "AquÃ­ podrÃ¡s probar los endpoints de usuarios, roles, personas, tipos, equipos y Ã³rdenes de servicio.")
                         .contact(new Contact()
-                                .name("Soporte Técnico")
+                                .name("Soporte TÃ©cnico")
                                 .email("soporte@tusistema.com"))
                         .license(new License()
                                 .name("Apache 2.0")

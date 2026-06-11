@@ -69,7 +69,7 @@ public class UsuarioController {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginCredentials.getUsuario(),
 					loginCredentials.getContrasenia()));
 		} catch (Exception e) {
-			throw new Exception("Usuario y/o contraseña incorrectos", e);
+			throw new Exception("Usuario y/o contraseÃ±a incorrectos", e);
 		}
 
 		return usuarioService.getByUsuario(loginCredentials.getUsuario())

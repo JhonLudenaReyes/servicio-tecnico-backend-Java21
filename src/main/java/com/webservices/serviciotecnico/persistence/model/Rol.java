@@ -2,17 +2,17 @@ package com.webservices.serviciotecnico.persistence.model;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import lombok.Data;
 
@@ -27,8 +27,8 @@ public class Rol {
 	private Integer idRol;
 	
 	@NotNull(message = "No debe enviar datos nulos")
-	@Size(min = 5, message = "Debe ingresar un mínimo de 5 caráteres")
-	@Size(max = 20, message = "Debe ingresar un máximo de 20 caráteres")
+	@Size(min = 5, message = "Debe ingresar un mÃ­nimo de 5 carÃ¡teres")
+	@Size(max = 20, message = "Debe ingresar un mÃ¡ximo de 20 carÃ¡teres")
 	@Column(length = 20, nullable = false)
 	private String rol;
 	

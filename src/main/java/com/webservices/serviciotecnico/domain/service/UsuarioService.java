@@ -38,7 +38,7 @@ public class UsuarioService {
 			// Solo actualizamos las propiedades solicitadas
 			existingUser.setUsuario(usuario.getUsuario());
 			
-			// Si la contraseña viene en la petición, se encripta de nuevo
+			// Si la contraseÃ±a viene en la peticiÃ³n, se encripta de nuevo
 			if (usuario.getContrasenia() != null && !usuario.getContrasenia().isEmpty()) {
 				existingUser.setContrasenia(passwordEncoder.encode(usuario.getContrasenia()));
 			}

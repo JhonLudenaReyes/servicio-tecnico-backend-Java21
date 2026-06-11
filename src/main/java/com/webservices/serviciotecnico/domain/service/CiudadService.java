@@ -17,7 +17,31 @@ public class CiudadService {
 		this.ciudadRepository = ciudadRepository;
 	}
 	
-	public Optional<List<Ciudad>> getCiudades(){
+	public Optional<List<Ciudad>> getAllActive(){
 		return ciudadRepository.getCiudades("A");
+	}
+
+	public Optional<Ciudad> getCiudad(int idCiudad) {
+		return ciudadRepository.getCiudad(idCiudad);
+	}
+
+	public Ciudad save(Ciudad ciudad) {
+		return ciudadRepository.save(ciudad);
+	}
+
+	public Optional<Ciudad> update(int idCiudad, Ciudad ciudad) {
+		return ciudadRepository.getCiudad(idCiudad).map(existingCiudad -> {
+			existingCiudad.setCiudad(ciudad.getCiudad());
+			existingCiudad.setEstado(ciudad.getEstado());
+			return ciudadRepository.save(existingCiudad);
+		});
+	}
+
+	public boolean delete(int idCiudad) {
+		return ciudadRepository.getCiudad(idCiudad).map(ciudad -> {
+			ciudad.setEstado("I");
+			ciudadRepository.save(ciudad);
+			return true;
+		}).orElse(false);
 	}
 }
