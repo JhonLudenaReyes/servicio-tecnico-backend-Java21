@@ -10,5 +10,6 @@ import java.util.List;
 public interface TipoMapper {
 
     TipoDTO toDTO(Tipo tipo);
+    Tipo toEntity(TipoDTO tipoDTO);
     List<TipoDTO> toDTOList(List<Tipo> tipos);
 }

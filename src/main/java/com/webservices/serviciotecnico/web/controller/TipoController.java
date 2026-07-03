@@ -37,8 +37,8 @@ public class TipoController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<TipoDTO> save(@RequestBody Tipo tipo) {
-        return new ResponseEntity<>(tipoMapper.toDTO(tipoService.save(tipo)), HttpStatus.CREATED);
+    public ResponseEntity<TipoDTO> save(@RequestBody TipoDTO tipoDTO) {
+        return new ResponseEntity<>(tipoMapper.toDTO(tipoService.save(tipoMapper.toEntity(tipoDTO))), HttpStatus.CREATED);
     }
 
     @PutMapping("/update/{id}")

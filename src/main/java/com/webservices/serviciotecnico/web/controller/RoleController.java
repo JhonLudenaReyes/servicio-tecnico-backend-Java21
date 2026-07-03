@@ -17,7 +17,6 @@ import com.webservices.serviciotecnico.domain.dto.RolSelectDTO;
 import com.webservices.serviciotecnico.domain.mapper.PermissionMapper;
 import com.webservices.serviciotecnico.domain.mapper.RolSelectMapper;
 import com.webservices.serviciotecnico.domain.service.RolService;
-import com.webservices.serviciotecnico.persistence.dtos.RolSelect;
 import com.webservices.serviciotecnico.persistence.model.Rol;
 
 @RestController
@@ -46,31 +45,9 @@ public class RoleController {
 
 	@GetMapping("/role-permits/{roleId}")
 	public ResponseEntity<?> getRole(@PathVariable("roleId") int roleId) {
-		Optional<Rol> role = rolService.getRole(roleId);
-		if(role.isPresent()) {
-			return new ResponseEntity<>(role, HttpStatus.OK);	
-		}else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
-
-	@GetMapping("/role/{roleId}")
-	public ResponseEntity<Rol> GetRoleById(@PathVariable("roleId") Integer roleId){
 		return rolService.getRole(roleId)
 				.map(role -> new ResponseEntity<>(role, HttpStatus.OK))
 				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-	}
-	
-	@GetMapping("/role-select/{roleId}")
-	public ResponseEntity<?> getRoleSelect(@PathVariable("roleId") int roleId) {
-		Optional<RolSelect> roleSelect = rolService.getRoleSelect(roleId);
-		if(roleSelect.isPresent()) {
-			return new ResponseEntity<>(roleSelect, HttpStatus.OK);	
-		}else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-
-		
 	}
 
 	@GetMapping("/active-roles")
@@ -88,7 +65,7 @@ public class RoleController {
 
 	@PostMapping("/save")
 	public ResponseEntity<Rol> saveRol(@RequestBody Rol rol) {
-		return new ResponseEntity<>(rolService.saveRol(rol), HttpStatus.OK);
+		return new ResponseEntity<>(rolService.saveRol(rol), HttpStatus.CREATED);
 	}
 
 	@PutMapping("/update-role")
@@ -111,13 +88,6 @@ public class RoleController {
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-	}
-
-	// Controlador para los metodos de la entidad RolSelect
-	@GetMapping("/roles-select")
-	public ResponseEntity<List<RolSelect>> getActiveRoles() {
-		return rolService.getRolesSelect().map(rol -> new ResponseEntity<>(rol, HttpStatus.OK))
-				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
 
 }

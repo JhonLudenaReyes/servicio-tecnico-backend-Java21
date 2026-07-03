@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.webservices.serviciotecnico.domain.repository.RolRepository;
-import com.webservices.serviciotecnico.persistence.dtos.RolSelect;
 import com.webservices.serviciotecnico.persistence.model.Rol;
 
 @Service
+@Transactional
 public class RolService {
 
 	private final RolRepository rolRepository;
@@ -22,10 +23,6 @@ public class RolService {
 		return rolRepository.getRole(idRole);
 	}
 	
-	public Optional<RolSelect> getRoleSelect(int roleId){
-		return rolRepository.getRoleSelect(roleId);
-	}
-	
 	public Optional<List<Rol>> getRolesActive(){
 		return rolRepository.getAllRolesActive();
 	}
@@ -33,8 +30,5 @@ public class RolService {
 	public Rol saveRol(Rol rol) {
 		return rolRepository.saveRol(rol);
 	}
-	
-	public Optional<List<RolSelect>> getRolesSelect(){
-		return rolRepository.getRolesSelect();
-	}
+
 }

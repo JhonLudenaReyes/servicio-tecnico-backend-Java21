@@ -19,10 +19,8 @@ public class Tipo {
     @Column(name = "id_tipo")
     private Integer idTipo;
 
-    @Column(length = 45, nullable = false)
     private String tipo;
 
-    @Column(columnDefinition = "char(1) not null default 'A'")
     private String estado = "A";
 
 }

@@ -28,11 +28,8 @@ public class Rol {
 	
 	@NotNull(message = "No debe enviar datos nulos")
 	@Size(min = 5, message = "Debe ingresar un mÃ­nimo de 5 carÃ¡teres")
-	@Size(max = 20, message = "Debe ingresar un mÃ¡ximo de 20 carÃ¡teres")
-	@Column(length = 20, nullable = false)
 	private String rol;
 	
-	@Column(columnDefinition = "varchar(1) not null default 'A'")
 	private String estado = "A";
 	
 	@ManyToMany
