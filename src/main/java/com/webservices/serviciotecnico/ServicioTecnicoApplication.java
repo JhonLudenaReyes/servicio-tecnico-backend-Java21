@@ -18,7 +18,7 @@ public class ServicioTecnicoApplication extends SpringBootServletInitializer {
 		SpringApplication.run(ServicioTecnicoApplication.class, args);
 
 		//BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		//String hash = encoder.encode("Adm123!*");
+		//String hash = encoder.encode("veRpeZ895!*");
 		//System.out.println(hash);
 	}
 

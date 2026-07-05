@@ -53,6 +53,7 @@ public class SecurityConfig {
                     "/usuarios/login/**",
                     "/usuarios/authenticate",
                     "/usuarios/save",
+                        "/clientes/listado",
                         "/ciudades/all",
                         "/tipos/all",
                         "/tipos/save",
