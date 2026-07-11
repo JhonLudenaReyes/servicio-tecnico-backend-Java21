@@ -21,4 +21,16 @@ public class ClienteRepositoryImpl implements ClienteRepository {
     public Optional<List<Persona>> getClients() {
         return clienteDaoRepository.findClientesActivos();
     }
+
+    @Override
+    public Optional<Persona> getClienteById(Integer personId) {
+        return clienteDaoRepository.findById(personId);
+    }
+
+    @Override
+    public Persona save(Persona persona) {
+        return clienteDaoRepository.save(persona);
+    }
+
+
 }

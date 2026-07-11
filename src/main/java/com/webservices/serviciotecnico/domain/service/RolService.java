@@ -31,4 +31,8 @@ public class RolService {
 		return rolRepository.saveRol(rol);
 	}
 
+	public Integer SearchRoleId(){
+		return rolRepository.SearchRoleId();
+	}
+
 }

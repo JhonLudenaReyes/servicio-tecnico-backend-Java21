@@ -9,4 +9,7 @@ import java.util.Optional;
 public interface ClienteRepository {
 
     Optional<List<Persona>> getClients();
+    Optional<Persona> getClienteById(Integer personId);
+    Persona save(Persona persona);
+
 }

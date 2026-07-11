@@ -34,7 +34,7 @@ public class Usuario {
 	@NotNull(message = "No debe enviar datos nulos")
 	@NotBlank(message = "Debe ingresar un nombre sin dejar espacios en blanco")
 	@Size(min = 5, message = "Debe ingresar un mÃ­nimo de 5 carÃ¡teres")
-	@Size(max = 10, message = "Debe ingresar un mÃ­nimo de 10 carÃ¡teres")
+	@Size(max = 30, message = "Debe ingresar un mÃ­nimo de 30 carÃ¡teres")
 	@Column(length = 10, nullable = false)
 	private String usuario;
 

@@ -11,4 +11,8 @@ public interface RolRepository {
 	
 	Optional<List<Rol>> getAllRolesActive();
 	Rol saveRol(Rol rol);
+
+	Optional<Rol> findById(Integer idRol);
+
+	Integer SearchRoleId();
 }
